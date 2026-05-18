@@ -1,0 +1,58 @@
+---
+import "../../styles/global.css";
+
+import Navbar from "@/components/en/NavBar";
+import Hero from "@/components/en/Hero";
+import Footer from "@/components/en/Footer";
+
+import { homeData } from "../../data/en/home";
+import CircularGalleryEN from "@/components/CircularGallery";
+import Trust from "@/components/Trust";
+import { Globe } from "@/components/ui/globe";
+import { Ripple } from "@/components/ui/ripple";
+import ProductCollection from '@/components/ProductCollection'
+
+const trust = homeData.trust;
+
+const { capabilities, CircularGallery, process, factory, cta } = homeData;
+
+const { images, esgStats, quote } = factory;
+const { title, subtitle, btnText, email, whatsapp } = cta;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <main >
+      <Navbar client:load />
+      <Hero client:load />
+      <Trust client:load  title={trust.title} descriptions={trust.descriptions} />
+      <ProductCollection></ProductCollection>
+      
+
+
+      <!-- 
+	  // Production & QC Workflow Section -->
+      <!-- <section class=" h-150 relative">
+        <CircularGalleryEN
+          client:load
+          items={CircularGallery.items}
+          bend={6}
+          textColor="#ffffff"
+          borderRadius={0.05}
+          scrollEase={0.02}
+          borderRadius={0.05}
+          scrollSpeed={2.6}
+          scrollEase={0.04}
+        />
+      </section> -->
+    </main>
+    <Footer />
+  </body>
+</html>
