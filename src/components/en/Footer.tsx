@@ -1,9 +1,10 @@
 import React from "react";
+import { RainbowButton } from "../ui/rainbow-button";
 
 function footer() {
   return (
 
-    <footer className="bg-white">
+    <footer className="bg-(--background)">
   <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
     <div className="lg:flex lg:items-start lg:gap-8">
       <div className="text-teal-600">
@@ -15,7 +16,7 @@ function footer() {
       <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-5 lg:gap-y-16">
         <div className="col-span-2">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Get the latest news!</h2>
+            <h2 className="text-2xl font-bold text-(--foreground) ">Get the latest news!</h2>
 
             <p className="mt-4 text-gray-500">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non cupiditate quae
@@ -28,18 +29,16 @@ function footer() {
           <form className="w-full">
             <label htmlFor="UserEmail" className="sr-only"> Email </label>
 
-            <div className="border border-gray-100 p-2 focus-within:ring-3 sm:flex sm:items-center sm:gap-4">
-              <input type="email" id="UserEmail" placeholder="john@rhcp.com" className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"/>
+            <div className="border border-gray-200 dark:border-gray-800 p-2 focus-within:ring-3 sm:flex sm:items-center sm:gap-4">
+              <input type="email" id="UserEmail" placeholder="john@rhcp.com" className="w-full dark:text-gray-200 text-gray-800 border-none focus:border-transparent focus:ring-transparent sm:text-sm"/>
 
-              <button className="mt-1 w-full bg-teal-500 px-6 py-3 text-sm font-bold tracking-wide text-white uppercase transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0">
-                Sign Up
-              </button>
+              <RainbowButton className=" bg-(--foreground) text-(--background)">Get Unlimited Access</RainbowButton>
             </div>
           </form>
         </div>
 
         <div className="col-span-2 sm:col-span-1">
-          <p className="font-medium text-gray-900">Services</p>
+          <p className="font-medium text-(--foreground)">Services</p>
 
           <ul className="mt-6 space-y-4 text-sm">
             <li>
@@ -69,7 +68,7 @@ function footer() {
         </div>
 
         <div className="col-span-2 sm:col-span-1">
-          <p className="font-medium text-gray-900">Company</p>
+          <p className="font-medium text-(--foreground)">Company</p>
 
           <ul className="mt-6 space-y-4 text-sm">
             <li>
@@ -89,7 +88,7 @@ function footer() {
         </div>
 
         <div className="col-span-2 sm:col-span-1">
-          <p className="font-medium text-gray-900">Helpful Links</p>
+          <p className="font-medium text-(--foreground)">Helpful Links</p>
 
           <ul className="mt-6 space-y-4 text-sm">
             <li>
@@ -107,7 +106,7 @@ function footer() {
         </div>
 
         <div className="col-span-2 sm:col-span-1">
-          <p className="font-medium text-gray-900">Legal</p>
+          <p className="font-medium text-(--foreground)">Legal</p>
 
           <ul className="mt-6 space-y-4 text-sm">
             <li>
@@ -131,7 +130,7 @@ function footer() {
         </div>
 
         <div className="col-span-2 sm:col-span-1">
-          <p className="font-medium text-gray-900">THANKS</p>
+          <p className="font-medium text-(--foreground)">THANKS</p>
 
           <ul className="mt-6 space-y-4 text-sm">
             <li>
@@ -204,23 +203,7 @@ function footer() {
 
     <div className="mt-8 border-t border-gray-100 pt-8">
       <div className="sm:flex sm:justify-between">
-        <p className="text-xs text-gray-500">© 2022. Company Name. All rights reserved.</p>
-
-        <ul className="mt-8 flex flex-wrap justify-start gap-4 text-xs sm:mt-0 lg:justify-end">
-          <li>
-            <a href="#" className="text-gray-500 transition hover:opacity-75">
-              Terms &amp; Conditions
-            </a>
-          </li>
-
-          <li>
-            <a href="#" className="text-gray-500 transition hover:opacity-75"> Privacy Policy </a>
-          </li>
-
-          <li>
-            <a href="#" className="text-gray-500 transition hover:opacity-75"> Cookies </a>
-          </li>
-        </ul>
+        <p className="text-xs text-gray-500">Copyright © 2026. NiuMoDao. </p>
       </div>
     </div>
   </div>

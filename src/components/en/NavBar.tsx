@@ -6,17 +6,26 @@ import { useEffect, useState } from "react";
 
 const { icons, brand } = homeData.navBar;
 export default function NavBar() {
-  const [changeNav, setChangeNav] = useState(false);
+  const [changeNav, setChangeNav] = useState() as any;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 300) {
+  const handleScroll = () => {
+      if (window.scrollY > window.innerHeight) {
         setChangeNav(true);
+        
       } else {
         setChangeNav(false);
       }
     };
 
+  useEffect(() => {
+   if (window.scrollY > window.innerHeight) {
+        setChangeNav(true);
+      } else {
+        setChangeNav(false);
+      }
+  }, []);   
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -25,8 +34,8 @@ export default function NavBar() {
     <div
       className={
         changeNav
-          ? `w-full pl-4 pr-4 z-20  flex items-center  text-(--foreground)  fixed backdrop-blur-sm top-0 shadow-sm transition-all `
-          : `w-full pl-4 pr-4 z-20  flex items-center  text-(--background)   fixed backdrop-blur-sm top-0 shadow-sm transition-all `
+          ? `w-full pl-4 pr-4 z-20  flex items-center  text-(--foreground) text-shadow-2xs  fixed backdrop-blur-sm top-0 shadow-sm transition-all `
+          : `w-full pl-4 pr-4 z-20  flex items-center  text-(--background) text-shadow-2xs fixed backdrop-blur-sm top-0 shadow-sm transition-all `
       }
     >
       <div className="w-1/4">
@@ -41,7 +50,7 @@ export default function NavBar() {
 
       <div className="w-1/4 flex justify-end items-center gap-4">
         {icons.map((icon) => (
-          <span className=" hover:text-(--primary) cursor-pointer">{icon}</span>
+          <span className=" hover:text-(--primary) text-sm cursor-pointer">{icon}</span>
         ))}
 
         <AnimatedThemeToggler className="hover:text-(--primary) cursor-pointer" />

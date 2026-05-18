@@ -13,11 +13,6 @@ import { Ripple } from "@/components/ui/ripple";
 import ProductCollection from '@/components/ProductCollection'
 
 const trust = homeData.trust;
-
-const { capabilities, CircularGallery, process, factory, cta } = homeData;
-
-const { images, esgStats, quote } = factory;
-const { title, subtitle, btnText, email, whatsapp } = cta;
 ---
 
 <html lang="en">
@@ -29,7 +24,7 @@ const { title, subtitle, btnText, email, whatsapp } = cta;
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
-    <main >
+    <main class=" w-full flex flex-col items-center">
       <Navbar client:load />
       <Hero client:load />
       <Trust client:load  title={trust.title} descriptions={trust.descriptions} />
