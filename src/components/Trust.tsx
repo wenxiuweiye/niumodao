@@ -13,9 +13,12 @@ export default function Trust({
     value: number;
   }[];
 }) {
+
+  const isMobile = window.innerWidth < 768; 
+
   return (
-    <section className="w-full h-full lg:h-screen relative flex flex-col items-center justify-center bg-(--background) pt-32 pb-32 lg:mt-0 lg:mb-0 ">
-      <Ripple numCircles={18} mainCircleSize={300} mainCircleOpacity={0.6} />
+    <section className="w-full h-full lg:h-screen relative flex flex-col items-center overflow-hidden justify-center bg-(--background) pt-32 pb-32 lg:mt-0 lg:mb-0 ">
+      <Ripple numCircles={isMobile?10:18} mainCircleSize={300} mainCircleOpacity={0.6} />
 
       <div className=" z-10 w-full h-screen relative flex flex-col items-center justify-center gap-24">
         <div className="text-xl lg:text-7xl text-(--foreground)  ">
