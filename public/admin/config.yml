@@ -1,0 +1,14 @@
+backend:
+  name: test-repo  # 本地测试用，不连真实仓库
+  repo: test/test
+local_backend: true
+media_folder: public/images
+public_folder: /public
+collections:
+  - name: blog
+    label: Blog
+    folder: src/pages/en/blog
+    create: true
+    fields:
+      - {label: Title, name: title, widget: string}
+      - {label: Body, name: body, widget: markdown}
