@@ -1,0 +1,76 @@
+---
+interface Props {
+  title: string;
+  date?: Date;
+}
+const { title, date } = Astro.props.frontmatter ;
+import "../styles/global.css";
+import Dayjs from "dayjs";
+import { AppSidebarInset } from "./AppSideBar";
+import { Button } from "@/components/ui/button";
+
+const mdList = import.meta.glob("../pages/zh/blog/*.md");
+const mdListSidebarData = Object.keys(mdList).map((path) => ({
+  url: path.replace("../pages/zh/blog/", "/zh/blog/").replace(".md", ""),
+  title: path.replace("../pages/zh/blog/", "").replace(".md", ""),
+}));
+
+const route = Astro.routePattern
+const beforeAndNext = mdListSidebarData.findIndex((item) => item.url === route);
+
+console.log("route: "+route, "midList: "+ mdListSidebarData[0].url);
+---
+
+<!-- src/layouts/BlogPost.astro -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{title+" | NIUMODAO"}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <main class="bg-popover">
+      <!-- <NavBar className=" text-(--foreground)" client:load /> -->
+      <AppSidebarInset route={route} client:load mdListSidebarData={mdListSidebarData}>
+        <article
+          class="w-full prose p-4 lg:p-12 prose-neutral dark:prose-invert lg:prose-xl bg-card text-card-foreground rounded-xl border border-border shadow-sm"
+        >
+          <header class="mb-8 border-b border-border">
+            <h1>{title}</h1>
+            {
+              date && (
+                <time class="block text-muted-foreground mt-2">
+                  <span>发布时间：</span>
+                  {Dayjs(date).format("YYYY-MM-DD")}
+                </time>
+              )
+            }
+          </header>
+
+          <!-- 👇 核心：所有 MD 内容走这个容器，自动应用样式 -->
+          <div>
+            <slot />
+            <div class="w-full border-b border-border"></div>
+            <div class="w-full flex flex-col lg:flex-row gap-4 mt-6">
+               {
+             beforeAndNext - 1 >= 0 && (
+              <Button variant="outline" className="p-2 flex-1 " onClick={() => window.navigation.navigate(mdListSidebarData[beforeAndNext - 1].url)}>
+                上一篇：{mdListSidebarData[beforeAndNext - 1].title}
+              </Button>
+             )
+            }
+            {
+              beforeAndNext + 1 < mdListSidebarData.length && (
+                <Button variant="outline" className="p-2 flex-1  " onClick={() => window.navigation.navigate(mdListSidebarData[beforeAndNext + 1].url)}>
+                  下一篇：{mdListSidebarData[beforeAndNext + 1].title}
+                </Button>
+              )
+            }
+            </div>
+          </div>
+        </article>
+      </AppSidebarInset>
+    </main>
+  </body>
+</html>

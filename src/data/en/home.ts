@@ -5,6 +5,7 @@ export const homeData = {
         brand: "NIUMODAO",
         icons: [
             "Products",
+            "Blog",
             "Contact Us",
         ]
     },

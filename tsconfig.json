@@ -7,6 +7,8 @@
     "baseUrl": ".",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@/components/*": ["src/components/*"]
     }

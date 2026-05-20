@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
 
 const { icons, brand } = homeData.navBar;
-export default function NavBar() {
+export default function NavBar({ className}: { className?: string }) {
   const [changeNav, setChangeNav] = useState() as any;
 
   const handleScroll = () => {
@@ -34,8 +34,9 @@ export default function NavBar() {
     <div
       className={
         changeNav
-          ? `w-full pl-4 pr-4 z-20  flex items-center  text-(--foreground) text-shadow-2xs  fixed backdrop-blur-sm top-0 shadow-sm transition-all `
-          : `w-full pl-4 pr-4 z-20  flex items-center  text-(--background) text-shadow-2xs fixed backdrop-blur-sm top-0 shadow-sm transition-all `
+          ? `w-full pl-4 pr-4 z-20  flex items-center  text-foreground text-shadow-2xs  fixed backdrop-blur-sm top-0 shadow-sm transition-all `
+          : `w-full pl-4 pr-4 z-20  flex items-center  text-background text-shadow-2xs fixed backdrop-blur-sm top-0 shadow-sm transition-all `
+          + className
       }
     >
       <div className="w-1/4">
@@ -44,16 +45,16 @@ export default function NavBar() {
         </Button>
       </div>
 
-      <div className="text-xl m-auto lg:text-3xl font-bold font-serif hover:text-(--primary) transition-all cursor-pointer hover:text-shadow-lg ">
+      <div className="text-xl m-auto lg:text-3xl font-bold font-serif hover:text-primary transition-all cursor-pointer hover:text-shadow-lg ">
         {brand}
       </div>
 
       <div className="w-1/4 flex justify-end items-center gap-4">
         {icons.map((icon) => (
-          <span className=" hover:text-(--primary) text-sm cursor-pointer">{icon}</span>
+          <span className=" hover:text-primary text-sm cursor-pointer">{icon}</span>
         ))}
 
-        <AnimatedThemeToggler className="hover:text-(--primary) cursor-pointer" />
+        <AnimatedThemeToggler className="hover:text-primary cursor-pointer" />
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ export default function Hero() {
           {/* CTA 按钮组 */}
           <div className="flex flex-col sm:flex-row gap-4 mb-12 ">
             <Button className=" bg-(--foreground)  shadow-2xl  backdrop-blur-lg text-(--background) cursor-pointer">View Our Capabilities</Button>
-            <InteractiveHoverButton className=" hover:text-white  backdrop-blur-lg rounded-b-none rounded-t-none hover:bg-(--primary)">Interactive Hover Button</InteractiveHoverButton>
+            <InteractiveHoverButton className=" rounded-none ">Interactive Hover Button</InteractiveHoverButton>
           </div>
 
         

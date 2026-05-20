@@ -1,6 +1,7 @@
 ---
 import "../../styles/global.css";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { Button } from "@/components/ui/button";
 import { Globe } from "@/components/ui/globe";
 
 // Full Astro Component Syntax:
@@ -16,9 +17,9 @@ import { Globe } from "@/components/ui/globe";
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
-    <main class=" w-screen bg-red-500 dark:bg-gray-900 h-screen">
+    <main class=" w-screen  h-screen">
        <AnimatedThemeToggler client:only />
-       <Globe client:load className="w-64 h-64 " />
+      <Button>aaa</Button>
     </main>
   </body>
 </html>

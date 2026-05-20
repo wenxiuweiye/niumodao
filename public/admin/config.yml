@@ -7,8 +7,16 @@ public_folder: /public
 collections:
   - name: blog
     label: Blog
-    folder: src/pages/en/blog
+    folder: src/pages/zh/blog
     create: true
     fields:
-      - {label: Title, name: title, widget: string}
-      - {label: Body, name: body, widget: markdown}
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "日期", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      
+      # 👇 新增：让编辑者选择布局（或用 hidden 固定默认值）
+      - label: "页面布局"
+        name: "layout"
+        default: "../../layout/BlogPost.astro"
+        required: true
+        
+      - { label: "内容", name: "body", widget: "markdown" }
