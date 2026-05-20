@@ -51,7 +51,9 @@ export default function NavBar({ className}: { className?: string }) {
 
       <div className="w-1/4 flex justify-end items-center gap-4">
         {icons.map((icon) => (
-          <span className=" hover:text-primary text-sm cursor-pointer">{icon}</span>
+          <a href={icon.url} className=" hover:text-primary text-sm cursor-pointer" >
+            {icon.name}
+          </a>
         ))}
 
         <AnimatedThemeToggler className="hover:text-primary cursor-pointer" />

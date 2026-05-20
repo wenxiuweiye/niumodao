@@ -7,11 +7,15 @@ import {
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Input } from "@/components/ui/input";
+import CloseLineIcon from '@iconify-react/ri/close-line';
+import React from "react";
 
 export function AppSidebar({
   mdListSidebarData,
@@ -19,16 +23,21 @@ export function AppSidebar({
 }: {
   mdListSidebarData: { url: string; title: string }[];
   route: string;
-
 }) {
+
+ const [searchContent, setSearchContent] = React.useState("")
+
   return (
     <Sidebar>
       <SidebarHeader className="p-6 gap-6">
         <div className="flex items-center gap-2">
           <AnimatedThemeToggler className="cursor-pointer " />
-          <span className="lg:text-xl font-bold font-serif cursor-pointer hover:text-primary transition-all">
+          <a
+            href={route.slice(0, 3)}
+            className="lg:text-xl font-bold font-serif cursor-pointer hover:text-primary transition-all"
+          >
             NIUMODAO
-          </span>
+          </a>
         </div>
         <div className="w-full h-0.5 bg-border"></div>
       </SidebarHeader>
@@ -36,14 +45,34 @@ export function AppSidebar({
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>
+            <SidebarMenuItem className="text-xs text-muted-foreground  ">
+              <Input placeholder="检索博客名称" value={searchContent} onChange={(e) => setSearchContent(e.target.value)} />
+              <SidebarMenuAction >
+                {
+                  searchContent 
+                    ? <CloseLineIcon onClick={() => setSearchContent("")}></CloseLineIcon>
+                    : null
+                }
+              </SidebarMenuAction>
+            </SidebarMenuItem>
             <SidebarMenuItem className="text-xs text-muted-foreground">
-              <SidebarMenuButton>博客</SidebarMenuButton>
+              <SidebarMenuButton
+                onClick={() =>
+                  window.navigation.navigate(`${route.slice(0, 3)}/blog`)
+                }
+              >
+                博客
+              </SidebarMenuButton>
             </SidebarMenuItem>
             {mdListSidebarData.map((item: any, idx: number) => (
               <SidebarMenuItem key={item.url ?? idx}>
                 <SidebarMenuButton
                   onClick={() => window.navigation.navigate(`${item.url}`)}
-                  className={item.url === route ? "bg-primary text-background hover:bg-primary/80 hover:text-background" : ""} 
+                  className={
+                    item.url === route
+                      ? "bg-primary text-white hover:bg-primary/80 hover:text-white/80"
+                      : ""
+                  }
                 >
                   <span>
                     <MarkdownLineIcon />
@@ -63,7 +92,7 @@ export function AppSidebar({
 export function AppSidebarInset({
   children,
   mdListSidebarData,
-  route
+  route,
 }: {
   children: React.ReactNode;
   mdListSidebarData: {
@@ -71,12 +100,11 @@ export function AppSidebarInset({
     title: string;
   }[];
   route: string;
-
 }) {
   return (
     <SidebarProvider>
       <AppSidebar route={route} mdListSidebarData={mdListSidebarData} />
-      <main className="w-full flex m-12 ">
+      <main className="w-full flex m-12 gap-12">
         <SidebarTrigger />
         {children}
       </main>

@@ -1,5 +1,10 @@
+---
+title: Niumodao
+date: 2026-05-20
+layout: ../../../layout/BlogPost.astro\
+tags: ["development"]
+---
 
-# Niumodao
 
 ## 项目简介
 这是一个基于 Astro + React 的多语言网站示例，集成了本地 Decap CMS 编辑界面。项目同时支持 `en` 和 `zh` 两种语言，包含自定义组件、页面布局、博客内容与动画效果。

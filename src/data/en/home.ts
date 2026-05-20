@@ -4,9 +4,9 @@ export const homeData = {
     navBar: {
         brand: "NIUMODAO",
         icons: [
-            "Products",
-            "Blog",
-            "Contact Us",
+           { name: "Products" , url: "/en/products" },
+            { name: "Blog", url: "/zh/blog/d3" },
+            { name: "Contact Us", url: "/en/contact" }
         ]
     },
 

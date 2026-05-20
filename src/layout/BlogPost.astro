@@ -3,11 +3,12 @@ interface Props {
   title: string;
   date?: Date;
 }
-const { title, date } = Astro.props.frontmatter ;
+const { title, date } = Astro.props.frontmatter;
 import "../styles/global.css";
 import Dayjs from "dayjs";
 import { AppSidebarInset } from "./AppSideBar";
 import { Button } from "@/components/ui/button";
+import markdownit from "markdown-it";
 
 const mdList = import.meta.glob("../pages/zh/blog/*.md");
 const mdListSidebarData = Object.keys(mdList).map((path) => ({
@@ -15,37 +16,66 @@ const mdListSidebarData = Object.keys(mdList).map((path) => ({
   title: path.replace("../pages/zh/blog/", "").replace(".md", ""),
 }));
 
-const route = Astro.routePattern
+const route = Astro.routePattern;
 const beforeAndNext = mdListSidebarData.findIndex((item) => item.url === route);
 
-console.log("route: "+route, "midList: "+ mdListSidebarData[0].url);
+const parsedMark = () => {
+  const markdownMap = markdownit().parse(Astro.props.rawContent());
+  let parsedMarkdownMap = [];
+  for (const token of markdownMap) {
+    if((markdownMap.indexOf(token) === markdownMap.length - 1)) break;
+    if ((token.type === "heading_open" )) {
+      parsedMarkdownMap.push({
+        content: markdownMap[markdownMap.indexOf(token) + 1].content,
+        tag: token.tag,
+      })
+    }
+  }
+  return parsedMarkdownMap;
+};
+const renderMarkMap = parsedMark()
+
+const tags = Astro.props.frontmatter.tags
+
 ---
 
 <!-- src/layouts/BlogPost.astro -->
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>{title+" | NIUMODAO"}</title>
+    <title>{title + " | NIUMODAO"}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
     <main class="bg-popover">
-      <!-- <NavBar className=" text-(--foreground)" client:load /> -->
-      <AppSidebarInset route={route} client:load mdListSidebarData={mdListSidebarData}>
+      <AppSidebarInset
+        route={route}
+        client:load
+        mdListSidebarData={mdListSidebarData}
+      >
         <article
-          class="w-full prose p-4 lg:p-12 prose-neutral dark:prose-invert lg:prose-xl bg-card text-card-foreground rounded-xl border border-border shadow-sm"
+          class=" prose flex-3 p-4 lg:p-12 prose-neutral dark:prose-invert lg:prose-xl bg-card text-card-foreground rounded-xl  shadow-sm"
         >
-          <header class="mb-8 border-b border-border">
+          <header class="pb-4 mb-8 flex flex-col border-b border-border gap-4">
             <h1>{title}</h1>
             {
               date && (
-                <time class="block text-muted-foreground mt-2">
+                <time class=" text-muted-foreground text-sm">
                   <span>发布时间：</span>
                   {Dayjs(date).format("YYYY-MM-DD")}
                 </time>
               )
             }
+            <div class="w-full flex items-center gap-4 text-sm  border-border ">
+               <span class="text-muted-foreground">标签：</span>
+              {
+              tags && tags.map((tag) => (
+                <Button size={"xs"} variant="outline" className=" text-secondary-foreground px-2 py-1  rounded-4xl ">
+                  {tag}
+                </Button>
+              ))
+            }</div>
           </header>
 
           <!-- 👇 核心：所有 MD 内容走这个容器，自动应用样式 -->
@@ -53,23 +83,52 @@ console.log("route: "+route, "midList: "+ mdListSidebarData[0].url);
             <slot />
             <div class="w-full border-b border-border"></div>
             <div class="w-full flex flex-col lg:flex-row gap-4 mt-6">
-               {
-             beforeAndNext - 1 >= 0 && (
-              <Button variant="outline" className="p-2 flex-1 " onClick={() => window.navigation.navigate(mdListSidebarData[beforeAndNext - 1].url)}>
-                上一篇：{mdListSidebarData[beforeAndNext - 1].title}
-              </Button>
-             )
-            }
-            {
-              beforeAndNext + 1 < mdListSidebarData.length && (
-                <Button variant="outline" className="p-2 flex-1  " onClick={() => window.navigation.navigate(mdListSidebarData[beforeAndNext + 1].url)}>
-                  下一篇：{mdListSidebarData[beforeAndNext + 1].title}
-                </Button>
-              )
-            }
+              {
+                beforeAndNext - 1 >= 0 && (
+                  <Button
+                    variant="outline"
+                    className="p-2 flex-1 "
+                    onClick={() =>
+                      window.navigation.navigate(
+                        mdListSidebarData[beforeAndNext - 1].url,
+                      )
+                    }
+                  >
+                    上一篇：{mdListSidebarData[beforeAndNext - 1].title}
+                  </Button>
+                )
+              }
+              {
+                beforeAndNext + 1 < mdListSidebarData.length && (
+                  <Button
+                    variant="outline"
+                    className="p-2 flex-1  "
+                    onClick={() =>
+                      window.navigation.navigate(
+                        mdListSidebarData[beforeAndNext + 1].url,
+                      )
+                    }
+                  >
+                    下一篇：{mdListSidebarData[beforeAndNext + 1].title}
+                  </Button>
+                )
+              }
             </div>
           </div>
         </article>
+        <div class="flex-1 flex-col gap-2 hidden lg:flex ">
+          <h2 class="text-md font-bold text-foreground ">文章目录</h2>
+        { 
+        renderMarkMap.map((item) => (
+          <div class="">
+            <a href={"#" + item.content} class={` ml-2 text-sm text-muted-foreground ${item.tag === "h3" && " ml-4"}`}>
+              {item.content}
+            </a>
+          </div>
+        ))
+      }
+      <div class="w-full border-b border-border"></div>
+      </div>
       </AppSidebarInset>
     </main>
   </body>
