@@ -14,7 +14,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Input } from "@/components/ui/input";
-import CloseLineIcon from '@iconify-react/ri/close-line';
+import CloseLineIcon from "@iconify-react/ri/close-line";
 import React from "react";
 
 export function AppSidebar({
@@ -24,8 +24,7 @@ export function AppSidebar({
   mdListSidebarData: { url: string; title: string }[];
   route: string;
 }) {
-
- const [searchContent, setSearchContent] = React.useState("")
+  const [searchContent, setSearchContent] = React.useState("");
 
   return (
     <Sidebar>
@@ -46,15 +45,41 @@ export function AppSidebar({
         <SidebarGroup>
           <SidebarMenu>
             <SidebarMenuItem className="text-xs text-muted-foreground  ">
-              <Input placeholder="检索博客名称" value={searchContent} onChange={(e) => setSearchContent(e.target.value)} />
-              <SidebarMenuAction >
-                {
-                  searchContent 
-                    ? <CloseLineIcon onClick={() => setSearchContent("")}></CloseLineIcon>
-                    : null
-                }
+              <Input
+                placeholder="检索博客名称"
+                value={searchContent}
+                onChange={(e) => setSearchContent(e.target.value)}
+              />
+              <SidebarMenuAction>
+                {searchContent ? (
+                  <CloseLineIcon
+                    onClick={() => setSearchContent("")}
+                  ></CloseLineIcon>
+                ) : null}
               </SidebarMenuAction>
             </SidebarMenuItem>
+
+            <SidebarMenuItem className="text-xs text-muted-foreground ">
+              {searchContent &&
+                mdListSidebarData
+                  .filter((item: any) => item.title.includes(searchContent))
+                  .map((item: any) => (
+                    <SidebarMenuButton
+                      onClick={() => window.navigation.navigate(`${item.url}`)}
+                      className={
+                        item.url === route
+                          ? "underline text-primary"
+                          : ""
+                      }
+                    >
+                      <span>
+                        <MarkdownLineIcon />
+                      </span>
+                      <span>{item.title}</span>
+                    </SidebarMenuButton>
+                  ))}
+            </SidebarMenuItem>
+
             <SidebarMenuItem className="text-xs text-muted-foreground">
               <SidebarMenuButton
                 onClick={() =>

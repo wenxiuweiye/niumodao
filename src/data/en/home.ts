@@ -5,7 +5,7 @@ export const homeData = {
         brand: "NIUMODAO",
         icons: [
            { name: "Products" , url: "/en/products" },
-            { name: "Blog", url: "/zh/blog/d3" },
+            { name: "Blog", url: "/zh/blog/" },
             { name: "Contact Us", url: "/en/contact" }
         ]
     },

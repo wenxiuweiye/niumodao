@@ -1,12 +1,52 @@
+---
+import { AppSidebarInset } from "src/layout/AppSideBar";
+import "../../../styles/global.css";
+import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+const blogMap = Object.keys(import.meta.glob("./*.md")).map((path) => {
+  return {
+    url: path.replace("./", "/zh/blog/").replace(".md", ""),
+    title: path.replace("./", "").replace(".md", ""),
+  };
+});
+const route = Astro.routePattern;
+console.log(blogMap);
+---
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        here is the blog index page
+      <AppSidebarInset client:load route={route} mdListSidebarData={blogMap}>
+        <div class= "w-full flex flex-wrap gap-4 ">
+             {
+          blogMap.map((item) => {
+            return (
+              <Card className= "w-full h-auto lg:w-64">
+                <CardHeader>
+                  <CardTitle>{item.title}</CardTitle>
+                  {/* <CardDescription>Card Description</CardDescription> */}
+                </CardHeader>
+                {/* <CardContent>
+                  <p>Card Content</p>
+                </CardContent> */}
+                <CardFooter className="mt-auto">
+                  <CardAction className="w-full">
+                    <Button className="p-0 w-full">
+                        <a class="flex-1 " href={item.url}>查看</a>
+                    </Button>
+                  </CardAction>
+                </CardFooter>
+              </Card>
+            );
+          })
+        }
+        </div>
+      </AppSidebarInset>
     </main>
-</body>
+  </body>
 </html>
