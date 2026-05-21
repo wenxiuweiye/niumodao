@@ -1,7 +1,7 @@
 ---
 title: Niumodao
 date: 2026-05-20
-layout: ../../../layout/BlogPost.astro\
+layout: ../../../layout/BlogPost.astro
 tags: ["development"]
 ---
 
