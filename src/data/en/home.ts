@@ -5,8 +5,10 @@ export const homeData = {
         brand: "NIUMODAO",
         icons: [
            { name: "Products" , url: "/en/products" },
+           { name: "Price", url: "/en/price" },
             { name: "Blog", url: "/zh/blog/" },
             { name: "Contact Us", url: "/en/contact" }
+             
         ]
     },
 

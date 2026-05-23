@@ -1,0 +1,47 @@
+---
+import { Separator } from "@/components/ui/separator";
+import "../../styles/global.css";
+import { Field } from "@/components/ui/field";
+import NavBar from "@/components/en/NavBar";
+import PriceContent from "@/components/Price";
+import AndroidContent from "@/components/Price/AndroidContent";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Price Calculator</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+
+  <body
+    class="bg-background text-foreground w-screen h-screen overflow-scroll-y lg:overflow-hidden"
+  >
+    <NavBar client:load className=" bg-background text-foreground" />
+    <main class="flex h-screen w-full flex-col lg:flex-row lg:pt-10">
+      <div class="flex-2 flex h-full justify-center mt-26 lg:mt-0 items-center">
+        <div class="d-mockup-phone m-12 ">
+          <div class="d-mockup-phone-camera"></div>
+          <div
+            style="background-image: url('/images/android_background.png');background-size: cover;"
+            class="d-mockup-phone-display flex text-white overflow-scroll-y opacity-100 "
+          >
+            <AndroidContent client:load />
+          </div>
+        </div>
+      </div>
+      <Separator orientation="vertical" />
+      <div
+        class="flex-5 flex flex-col items-center p-4 gap-4 mt-26 lg:mt-0 lg:overflow-y-scroll"
+      >
+        <Field className="font-serif text-3xl">
+          <span>价格计算器</span>
+        </Field>
+        <PriceContent client:load />
+      </div>
+    </main>
+  </body>
+</html>

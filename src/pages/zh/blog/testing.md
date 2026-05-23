@@ -1,7 +1,7 @@
 ---
 title: testing
 date: 2026-05-20
-layout: ../../../layout/BlogPost.astro
+layout: src/layouts/BlogPost.astro
 tags: ["test", "development"]
 ---
 

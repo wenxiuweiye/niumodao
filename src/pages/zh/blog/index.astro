@@ -1,5 +1,5 @@
 ---
-import { AppSidebarInset } from "src/layout/AppSideBar";
+import { AppSidebarInset } from "src/layouts/AppSideBar";
 import "../../../styles/global.css";
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -19,7 +19,7 @@ console.log(blogMap);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body>
+  <body class="bg-background text-foreground">
     <main>
       <AppSidebarInset client:load route={route} mdListSidebarData={blogMap}>
         <div class= "w-full flex flex-wrap gap-4 ">

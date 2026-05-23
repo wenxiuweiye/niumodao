@@ -16,7 +16,7 @@ collections:
       # 👇 新增：让编辑者选择布局（或用 hidden 固定默认值）
       - label: "页面布局"
         name: "layout"
-        default: "../../../layout/BlogPost.astro"
+        default: "src/layouts/BlogPost.astro"
         required: true
       - label: "标签"
         name: "tags"
