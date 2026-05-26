@@ -469,10 +469,376 @@ const waistCardOptions: PriceBaseOption[] = [
         symbol: "￥"
     },
 ]
+const washingProcessOptions: PriceBaseOption[] = [
+    {
+        id: "saltWash",
+        label: "炒盐",
+        value: 1.5,
+        description: "盐粒+化学助剂高温翻炒，产生不规则雪花状褪色纹理，复古感强，适合牛仔/工装系列",
+        symbol: "￥"
+    },
+    {
+        id: "enzymeStoneWash",
+        label: "酵石磨（酵磨）",
+        value: 2.5,
+        description: "纤维素酶+浮石协同作用，温和褪色+细腻磨白，手感柔软，中高端牛仔主流工艺",
+        symbol: "￥"
+    },
+    {
+        id: "normalWash",
+        label: "普洗",
+        value: 0.8,
+        description: "常规洗涤剂+温水机械洗涤，清洁去浆+初步软化，基础款成衣首选，性价比高",
+        symbol: "￥"
+    },
+    {
+        id: "waistTieWash",
+        label: "扎裤头",
+        value: 0.05,
+        description: "腰头局部捆扎防皱处理，避免洗水过程中产生死褶，保障腰头平整度，常规配套工艺",
+        symbol: "￥"
+    },
+    {
+        id: "vintageWash",
+        label: "怀旧",
+        value: 0.3,
+        description: "复合助剂+轻度褪色+柔和做旧，营造自然穿着痕迹，适合复古/休闲风格基础升级",
+        symbol: "￥"
+    },
+    {
+        id: "ppSpray",
+        label: "喷马骝",
+        value: 0.6,
+        description: "高锰酸钾溶液喷枪局部喷涂，精准控制褪色区域，表层+里层同步泛白，立体感强",
+        symbol: "￥"
+    },
+    {
+        id: "handBrushWhisker",
+        label: "手擦/猫须",
+        value: 0.5,
+        description: "砂纸/砂轮手工打磨褶皱处，形成自然猫须纹理，模拟长期穿着痕迹，经典牛仔工艺",
+        symbol: "￥"
+    }
+] as const satisfies PriceBaseOption[]
 
-const washingFlow = {
-    
-}
+const threadTrimmingOptions: PriceBaseOption[] = [
+    {
+        label: "无剪线",
+        value: 0,
+        id: "noThreadTrimming",
+        description: "不单独修剪线头，依赖缝制工序同步处理，适合基础快反款",
+        symbol: "￥"
+    },
+    {
+        label: "人工修剪",
+        value: 0.08,
+        id: "manualTrimming",
+        description: "基础手工修除线头，适合轻薄面料/内销订单",
+        symbol: "￥"
+    },
+    {
+        label: "气动剪线机",
+        value: 0.12,
+        id: "pneumaticTrimming",
+        description: "气动设备辅助修剪，效率高+切口平整，牛仔/厚料标配",
+        symbol: "￥"
+    },
+    {
+        label: "精细全检修剪",
+        value: 0.15,
+        id: "premiumDetailTrimming",
+        description: "100%逐件检查+无可见线头标准，高端品牌/出口单推荐",
+        symbol: "￥"
+    }
+];
+const bartackOptions: PriceBaseOption[] = [
+    {
+        label: "无打钉",
+        value: 0,
+        id: "noBartack",
+        description: "不配置额外加固打钉，依赖基础缝线强度，适合轻薄/低应力款",
+        symbol: "￥"
+    },
+    {
+        label: "基础打钉（单点）",
+        value: 0.05,
+        id: "basicBartack",
+        description: "裤头风眼处打钉，常规裤子标配",
+        symbol: "￥"
+    },
+    {
+        label: "双点打钉（加强）",
+        value: 0.08,
+        id: "doubleBartack",
+        description: "左右侧袋口双位置打枣+高密度线迹，抗拉力提升50%，牛仔/工装裤推荐",
+        symbol: "￥"
+    },
+    {
+        label: "四点打钉",
+        value: 0.12,
+        id: "hiddenBartack",
+        description: "打钉位于前面所有袋口，兼顾强度与美观，高端品牌专用",
+        symbol: "￥"
+    }
+];
+const brandPlateOptions: PriceBaseOption[] = [
+    {
+        label: "无车牌",
+        value: 0,
+        id: "noBrandPlate",
+        description: "不配置金属品牌标牌，保持素面设计，适合极简风或客户自备辅料",
+        symbol: "￥"
+    },
+    {
+        label: "常规车牌",
+        value: 0.1,
+        id: "zincAlloyPlate",
+        description: "主流右后方裤头车双线车牌",
+        symbol: "￥"
+    },
+    {
+        label: "定制异形车牌（带防伪）",
+        value: 1.5,
+        id: "customAntiCounterfeitPlate",
+        description: "四线及以上多线车牌",
+        symbol: "￥"
+    }
+];
+const pressingOptions: PriceBaseOption[] = [
+    {
+        label: "无整烫",
+        value: 0,
+        id: "noPressing",
+        description: "跳过独立整烫工序，依赖缝制后自然平整，适合针织/弹性面料",
+        symbol: "￥"
+    },
+    {
+        label: "基础平烫",
+        value: 0.20,
+        id: "flatPressing",
+        description: "平面蒸汽熨烫，快速去皱，常规梭织裤款适用",
+        symbol: "￥"
+    },
+    {
+        label: "立体骨位烫",
+        value: 0.25,
+        id: "contourPressing",
+        description: "裤骨/接缝立体定型，强化轮廓挺括度，牛仔裤标配",
+        symbol: "￥"
+    },
+    {
+        label: "立体骨位烫+高温夹烫",
+        value: 0.53,
+        id: "contourClampPressing",
+        description: "预缩处理+高温夹板定型，提升尺寸稳定性与抗皱保形，棉麻/重磅面料专用",
+        symbol: "￥"
+    }
+];
+
+const qcInspectionOptions: PriceBaseOption[] = [
+    {
+        label: "无终检",
+        value: 0,
+        id: "noQcInspection",
+        description: "依赖缝制过程质检，出厂前不单独全检，适合低成本快反单",
+        symbol: "￥"
+    },
+    {
+        label: "100%全检",
+        value: 0.2,
+        id: "fullInspection",
+        description: "逐件检查外观/做工/尺寸，电商/品牌单标配，降退货率",
+        symbol: "￥"
+    },
+    {
+        label: "出口验针+全检",
+        value: 0.45,
+        id: "metalDetectInspection",
+        description: "含验针机扫描金属残留+100%全检，欧美/日本出口强制要求",
+        symbol: "￥"
+    }
+];
+const foldingOptions: PriceBaseOption[] = [
+    {
+        label: "无折叠",
+        value: 0,
+        id: "noFolding",
+        description: "成品直接挂装或卷装发货，跳过折叠工序，适合高端挂装单",
+        symbol: "￥"
+    },
+    {
+        label: "标准流水线折叠",
+        value: 0.10,
+        id: "standardFolding",
+        description: "基础对折/卷折，适合仓储堆叠+常规物流",
+        symbol: "￥"
+    },
+    {
+        label: "高级纸板定型",
+        value: 0.15,
+        id: "cardboardShaping",
+        description: "内置硬纸板支撑+精准折痕，保持立体廓形，高端品牌/礼盒单专用",
+        symbol: "￥"
+    }
+];
+const taggingOptions: PriceBaseOption[] = [
+    {
+        label: "无吊牌",
+        value: 0,
+        id: "noTagging",
+        description: "不配置品牌吊牌，适合白牌/定制单或客户自备标签",
+        symbol: "￥"
+    },
+    {
+        label: "普通塑料扣穿标",
+        value: 0.03,
+        id: "plasticLoopTagging",
+        description: "基础胶针/塑料扣固定吊牌，成本低+效率高，快时尚主流",
+        symbol: "￥"
+    },
+    {
+        label: "防盗吊牌+手工穿",
+        value: 0.5,
+        id: "securityTagging",
+        description: "带防盗芯片/防拆结构+手工精细穿挂，商场专柜/高单价商品标配",
+        symbol: "￥"
+    }
+];
+
+const polybaggingOptions: PriceBaseOption[] = [
+    {
+        label: "无独立装袋",
+        value: 0,
+        id: "noPolybagging",
+        description: "多件捆扎或直接装箱，跳过单件装袋，适合大宗批发/低成本订单",
+        symbol: "￥"
+    },
+    {
+        label: "基础PE袋+人工",
+        value: 0.05,
+        id: "basicPeBagging",
+        description: "0.03mm透明PE袋+人工装袋，内销标准包装，防潮防尘",
+        symbol: "￥"
+    },
+    {
+        label: "加厚防潮+干燥剂",
+        value: 0.07,
+        id: "moistureProofBagging",
+        description: "0.05mm加厚PE膜+1g硅胶干燥剂，海运防潮防霉，高湿地区/长期仓储推荐",
+        symbol: "￥"
+    }
+];
+const labelingOptions: PriceBaseOption[] = [
+    {
+        label: "无贴标",
+        value: 0,
+        id: "noLabeling",
+        description: "不贴附任何外标/条码，适合定制单或客户自行后处理",
+        symbol: "￥"
+    },
+    {
+        label: "基础SKU贴标",
+        value: 0.02,
+        id: "basicSkuLabeling",
+        description: "单品/批次条码贴附，支持常规仓储扫码流转",
+        symbol: "￥"
+    }
+];
+const sizeSortingOptions: PriceBaseOption[] = [
+    {
+        label: "无需配码",
+        value: 0,
+        id: "noSizeSorting",
+        description: "单色单码订单直接入箱，跳过分拣工序，效率最高",
+        symbol: "￥"
+    },
+    {
+        label: "基础混码分拣",
+        value: 0.02,
+        id: "basicMixSorting",
+        description: "按尺码比例（如1:1:2:1）手工分装入箱，常规混码订单适用",
+        symbol: "￥"
+    },
+    {
+        label: "多SKU精准配比",
+        value: 0.1,
+        id: "precisionAssortSorting",
+        description: "多颜色/多尺码交叉配比+扫码校验防错，电商多规格订单/品牌配货专用",
+        symbol: "￥"
+    }
+];
+const cartoningOptions: PriceBaseOption[] = [
+    {
+        label: "无独立装箱",
+        value: 0,
+        id: "noCartoning",
+        description: "成品直接捆扎发货或客户自备包装，跳过纸箱环节，适合大宗批发",
+        symbol: "￥"
+    },
+    {
+        label: "普通三层箱分摊",
+        value: 0.15,
+        id: "threeLayerCartoning",
+        description: "BC瓦楞三层纸箱+人工装箱，内销/短途物流标准配置",
+        symbol: "￥"
+    },
+    {
+        label: "出口五层瓦楞箱",
+        value: 0.25,
+        id: "fiveLayerExportCartoning",
+        description: "双瓦楞五层箱+内隔板防压，抗压防潮，欧美/海运出口标配",
+        symbol: "￥"
+    },
+    {
+        label: "定制彩盒+内衬",
+        value: 0.80,
+        id: "customColorboxCartoning",
+        description: "品牌定制彩盒+珍珠棉/纸托内衬，开箱体验升级，高端零售/礼品单专用",
+        symbol: "￥"
+    }
+];
+const sealingOptions: PriceBaseOption[] = [
+    {
+        label: "无封箱加固",
+        value: 0,
+        id: "noSealing",
+        description: "纸箱简单合盖不封胶，适合短途自提/客户现场封装",
+        symbol: "￥"
+    },
+    {
+        label: "基础胶带封口 (含物料成本)",
+        value: 0.02,
+        id: "tapeSealing",
+        description: "透明封箱胶带一字/工字封，常规物流防开箱",
+        symbol: "￥"
+    },
+    {
+        label: "工字封+PP打包带(含物料成本)",
+        value: 0.08,
+        id: "ppStrappingSealing",
+        description: "胶带工字封+PET打包带十字加固，防暴力运输开箱，电商/长途物流推荐",
+        symbol: "￥"
+    }
+];
+const masterLabelingOptions: PriceBaseOption[] = [
+    {
+        label: "无外箱标",
+        value: 0,
+        id: "noMasterLabeling",
+        description: "外箱不贴任何标签，适合客户自备唛头或现场打印",
+        symbol: "￥"
+    },
+    {
+        label: "标准英文/双语外箱标 (含物料成本)",
+        value: 0.03,
+        id: "enBilingualLabeling",
+        description: "含PO#/目的地/条码/中英文品名，出口订单标配，清关高效",
+        symbol: "￥"
+    }
+];
+
+type WashingProcessType = typeof washingProcessOptions[number]['id'];
+
 
 type FabricPriceFormData = {
     lengthFactor: number;
@@ -501,12 +867,35 @@ type TrimsAndAccessoriesPriceFormData = {
     hangTagStringCost: number;
 }
 
+type WashingFlowFormData = {
+    washingtotalCost: number;
+}
 
+ type FinishingPriceFormData = {
+    // === 基础后整工序 ===
+    threadTrimmingCost: number;
+    bartackCost: number;
+    brandPlateCost: number;
+    pressingCost: number;
+    qcInspectionCost: number;
+    foldingCost: number;
+    taggingCost: number;
+    polybaggingCost: number;
+    labelingCost: number;
+    sizeSortingCost: number;
+    cartoningCost: number;
+    sealingCost: number;
+    masterLabelingCost: number;
+};
 
 export type {
     FabricPriceFormData,
     ProgressPriceFormData,
-    TrimsAndAccessoriesPriceFormData
+    TrimsAndAccessoriesPriceFormData,
+    WashingFlowFormData,
+    FinishingPriceFormData,
+
+    WashingProcessType
 }
 
 export {
@@ -529,4 +918,22 @@ export {
     leatherPatchOptions,
     hangTagStringOptions,
     careLabelOptions,
+
+    washingProcessOptions,
+
+    threadTrimmingOptions,
+    pressingOptions,
+    qcInspectionOptions,
+    foldingOptions,
+    taggingOptions,
+    polybaggingOptions,
+    labelingOptions,
+    sizeSortingOptions,
+    cartoningOptions,
+    sealingOptions,
+    masterLabelingOptions,
+    bartackOptions,
+    brandPlateOptions,
+    pocketCardOptions,
+    waistCardOptions,
 }

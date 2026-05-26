@@ -9,7 +9,7 @@ import {
 } from "../ui/field";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
-import { useForm } from "react-hook-form";
+import { useForm, type ControllerFieldState } from "react-hook-form";
 import {
   HoverCard,
   HoverCardContent,
@@ -23,12 +23,14 @@ type PriceOptionProps = {
   title: string;
   radioGroupOptions: PriceBaseOption[];
   onValueChange: (...event: any[]) => void;
+  state?: ControllerFieldState;
 };
 export default function PriceOption({
   className,
   title,
   radioGroupOptions,
   onValueChange,
+  state,
 }: PriceOptionProps) {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -58,7 +60,10 @@ export default function PriceOption({
                   <Field orientation="horizontal">
                     <FieldContent>
                       <FieldTitle>{label}</FieldTitle>
-                      <FieldDescription>{value}{symbol}</FieldDescription>
+                      <FieldDescription>
+                        {symbol}
+                        {value}
+                      </FieldDescription>
                     </FieldContent>
                     <RadioGroupItem value={id} id={id} />
                   </Field>
@@ -76,6 +81,11 @@ export default function PriceOption({
           </HoverCard>
         ))}
       </RadioGroup>
+      {state?.error && (
+        <FieldDescription className="text-destructive mt-1">
+          {state.error.message}
+        </FieldDescription>
+      )}
     </Field>
   );
 }

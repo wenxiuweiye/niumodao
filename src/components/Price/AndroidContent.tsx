@@ -5,6 +5,8 @@ import {
   $fabricPrice,
   $trimsAndAccessoriesPrice,
   $progressPrice,
+  $washingProcessPrice,
+  $finishingPackingPrice,
 } from "../../stores/priceStore";
 import { Field, FieldContent, FieldLabel } from "../ui/field";
 import { chain } from "mathjs";
@@ -14,9 +16,14 @@ export default function AndroidContent() {
   const fabricPrice = useStore($fabricPrice);
   const trimsAndAccessoriesPrice = useStore($trimsAndAccessoriesPrice);
   const progressPrice = useStore($progressPrice);
+  const washingFlowPrice = useStore($washingProcessPrice);
+  const finishingPackingPrice = useStore($finishingPackingPrice);
   const totalPrice = chain(fabricPrice)
     .add(progressPrice)
     .add(trimsAndAccessoriesPrice)
+    .add(washingFlowPrice)
+    .add(finishingPackingPrice)
+    .round(3)
     .done();
 
   return (
@@ -33,6 +40,14 @@ export default function AndroidContent() {
         <Field>
           <FieldLabel>辅料价格</FieldLabel>
           <FieldContent>{trimsAndAccessoriesPrice}</FieldContent>
+        </Field>
+        <Field>
+          <FieldLabel>水洗价格</FieldLabel>
+          <FieldContent>{washingFlowPrice}</FieldContent>
+        </Field>
+        <Field>
+          <FieldLabel>包装价格</FieldLabel>
+          <FieldContent>{finishingPackingPrice}</FieldContent>
         </Field>
       </Field>
 
